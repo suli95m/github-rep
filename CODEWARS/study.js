@@ -20,3 +20,12 @@ function disemvowel2(str) {
 		.filter(letter => !vowels.includes(letter.toLowerCase()))
 		.join('')
 }
+
+function squareDigits(num) {
+	let res = ''
+	const string = num + ''
+	for (let i = 0; i <= String(num + 1).length; i++) {
+		res += Math.pow(string[i], 2)
+	}
+	return parseInt(res, 10)
+}

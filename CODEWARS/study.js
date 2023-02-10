@@ -29,3 +29,29 @@ function squareDigits(num) {
 	}
 	return parseInt(res, 10)
 }
+
+function even_or_odd(number) {
+	return number % 2 ? 'Odd' : 'Even'
+}
+
+function accum(s) {
+	let res = s[0].toUpperCase()
+	for (let i = 1; i < s.length; i++) {
+		res += '-' + s[i].toUpperCase() + s[i].repeat(i).toLowerCase()
+	}
+	return res
+}
+
+const binaryArrayToNumber = arr => {
+	let res = 0
+	let j = 0
+	for (let i = arr.length - 1; i >= 0; i--) {
+		if (arr[i] === 1) {
+			res += Math.pow(2, j)
+		}
+		j += 1
+	}
+	return res
+}
+
+console.log(binaryArrayToNumber([1, 0, 1, 0]))

@@ -55,3 +55,25 @@ const binaryArrayToNumber = arr => {
 }
 
 console.log(binaryArrayToNumber([1, 0, 1, 0]))
+
+function toCamelCase(str) {
+	let regExp = /[-_]\w/gi
+
+	return str.replace(regExp, function (match) {
+		return match.charAt(1).toUpperCase()
+	})
+}
+
+function alphabetPosition(text) {
+	let res = ''
+	const q = text.toLowerCase()
+	const arr = 'abcdefghijklmnopqrstuvwxyz'
+	for (let i = 0; i < text.length; i++) {
+		for (let k = 0; k < arr.length; k++) {
+			if (arr[k].includes(q[i])) {
+				res += k + 1 + ' '
+			}
+		}
+	}
+	return res.slice(0, res.length - 1)
+}

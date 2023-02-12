@@ -77,3 +77,53 @@ function alphabetPosition(text) {
 	}
 	return res.slice(0, res.length - 1)
 }
+
+function solution(start, finish) {
+	//exercises about cat
+	let res = 0
+	let fin = finish - start
+	while (fin > 0) {
+		if (fin >= 3) {
+			res += 1
+			fin -= 3
+		} else {
+			res += 1
+			fin -= 1
+		}
+	}
+	return res
+}
+
+function order(words) {
+	if (words === '') {
+		return ''
+	}
+	const arr = words.split(' ')
+	const res = []
+	for (let i = 1; i <= arr.length; i++) {
+		for (let k = 0; k < arr.length; k++) {
+			if (arr[k].includes(i)) {
+				res.push(arr[k])
+			}
+		}
+	}
+	return res.join(' ')
+}
+//need to learn
+function findShort(s) {
+	return Math.min.apply(
+		null,
+		s.split(' ').map(w => w.length)
+	)
+}
+//my solution
+function findShort(s) {
+	let res = s.length
+	const arr = s.split(' ')
+	for (let i = 0; i < arr.length; i++) {
+		if (res > arr[i].length) {
+			res = arr[i].length
+		}
+	}
+	return res
+}

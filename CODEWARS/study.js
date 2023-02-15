@@ -148,3 +148,69 @@ function narcissistic(value) {
 	}
 	return res === value
 }
+
+function solve(s) {
+	const arr = [
+		'QWERTYUIOPASDFGHJKLZXCVBNM',
+		'qwertyuiopasdfghjklzxcvbnm',
+		'1234567890',
+	]
+	if (s === '') {
+		return [0, 0, 0, 0]
+	}
+	let upperCase = 0
+	let lowerCase = 0
+	let num = 0
+	let special = 0
+	for (let i = 0; i < s.length; i++) {
+		if (arr[0].includes(s[i])) {
+			upperCase += 1
+		} else if (arr[1].includes(s[i])) {
+			lowerCase += 1
+		} else if (arr[2].includes(s[i])) {
+			num += 1
+		} else {
+			special += 1
+		}
+	}
+	return [upperCase, lowerCase, num, special]
+}
+
+function timeCorrect(timestring) {
+	if (timestring === '') {
+		return ''
+	}
+	if (timestring === null) {
+		return null
+	}
+	if (timestring[2] !== ':') {
+		return null
+	}
+	for (let i = 0; i < timestring.length; i++) {
+		if (!'1234567890:'.includes(timestring[i])) {
+			return null
+		}
+	}
+	const arr = timestring.split(':')
+	let hours = 0
+	let minutes = 0
+	let seconds = arr[2]
+	if (arr[2] > 59) {
+		seconds += arr[2] % 60
+		minutes += (arr[2] - seconds) / 60
+	} else {
+		seconds = arr[2]
+	}
+	if (arr[1] > 59) {
+		minutes += arr[1] % 60
+		hours += Math.ceil((arr[1] - minutes) / 60)
+	} else {
+		minutes = arr[1]
+	}
+	if (arr[0] > 23) {
+		hours += arr[0] % 24
+	} else {
+		hours = arr[0]
+	}
+	return [hours, minutes, seconds].join(':')
+}

@@ -176,41 +176,53 @@ function solve(s) {
 	return [upperCase, lowerCase, num, special]
 }
 
-function timeCorrect(timestring) {
-	if (timestring === '') {
+function timeCorrect(timeString) {
+	if (timeString === '') {
 		return ''
 	}
-	if (timestring === null) {
+	if (timeString === null) {
 		return null
 	}
-	if (timestring[2] !== ':') {
-		return null
-	}
-	for (let i = 0; i < timestring.length; i++) {
-		if (!'1234567890:'.includes(timestring[i])) {
+
+	const [h, m, s] = timeString.split(':')
+
+	let hours = parseInt(h, 10)
+	let minutes = parseInt(m, 10)
+	let seconds = parseInt(s, 10)
+
+	for (let k = 2; k < timeString.length; k += 3) {
+		if (timeString[k] !== ':') {
 			return null
 		}
 	}
-	const arr = timestring.split(':')
-	let hours = 0
-	let minutes = 0
-	let seconds = arr[2]
-	if (arr[2] > 59) {
-		seconds += arr[2] % 60
-		minutes += (arr[2] - seconds) / 60
-	} else {
-		seconds = arr[2]
+	for (let i = 0; i < timeString.length; i++) {
+		if ('1234567890:'.indexOf(timeString[i]) < 0) {
+			return null
+		}
 	}
-	if (arr[1] > 59) {
-		minutes += arr[1] % 60
-		hours += Math.ceil((arr[1] - minutes) / 60)
-	} else {
-		minutes = arr[1]
+
+	if (seconds >= 60) {
+		minutes += Math.floor(seconds / 60)
+		seconds %= 60
 	}
-	if (arr[0] > 23) {
-		hours += arr[0] % 24
-	} else {
-		hours = arr[0]
+	if (minutes >= 60) {
+		hours += Math.floor(minutes / 60)
+		minutes %= 60
 	}
-	return [hours, minutes, seconds].join(':')
+	if (hours >= 24) {
+		hours %= 24
+	}
+
+	return `${hours.toString().padStart(2, '0')}:${minutes
+		.toString()
+		.padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`
+}
+
+//нужно разобрать
+function timeCorrect(str) {
+	const date = new Date()
+	if (str == '') return str
+	if (!/^\d{2}\:\d{2}\:\d{2}$/g.test(str)) return null
+	date.setUTCHours(...str.split(':'))
+	return date.toLocaleTimeString('en', { hour12: false })
 }

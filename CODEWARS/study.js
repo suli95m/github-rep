@@ -176,6 +176,26 @@ function solve(s) {
 	return [upperCase, lowerCase, num, special]
 }
 
+//learn it
+function solution(input, markers) {
+	const lines = input.split('\n')
+
+	for (let i = 0; i < lines.length; i++) {
+		const markerIndex = markers.reduce((index, marker) => {
+			const markerPos = lines[i].indexOf(marker)
+			return markerPos !== -1 && (index === -1 || markerPos < index)
+				? markerPos
+				: index
+		}, -1)
+
+		if (markerIndex !== -1) {
+			lines[i] = lines[i].substring(0, markerIndex).trimRight()
+		}
+	}
+
+	return lines.join('\n')
+}
+
 function timeCorrect(timeString) {
 	if (timeString === '') {
 		return ''

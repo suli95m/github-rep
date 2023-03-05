@@ -246,3 +246,14 @@ function timeCorrect(str) {
 	date.setUTCHours(...str.split(':'))
 	return date.toLocaleTimeString('en', { hour12: false })
 }
+
+function mergeStrings(first, second) {
+	// Your solution
+	let overlap = 0
+	for (let i = 1; i <= Math.min(first.length, second.length); i++) {
+		if (first.slice(-i) === second.slice(0, i)) {
+			overlap = i
+		}
+	}
+	return first + second.slice(overlap)
+}
